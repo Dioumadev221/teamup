@@ -11,7 +11,7 @@
 <body>
     <?php require_once 'phpinclude/navbar.php'; ?>
     <div class="container mt-4">
-        <?php echo FPLGlobal::$view_result->content ?? ''; ?>
+       <?php echo isset(FPLGlobal::$view_result->content) ? FPLGlobal::$view_result->content : ''; ?>
     </div>
 </body>
 </html>
