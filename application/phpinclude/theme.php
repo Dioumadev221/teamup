@@ -1,0 +1,1 @@
+<link rel="stylesheet" href="<?php echo FPLGlobal::get_theme_uri(); ?>/master.css">
