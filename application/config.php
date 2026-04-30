@@ -1,4 +1,48 @@
 <?php
+
+require_once __DIR__ . '/../comfpl/bundle.php';
+require_once __DIR__ . '/../comfpl/FPLGlobal.php';
+if (!class_exists('bundle')) {
+    class bundle
+    {
+        public $css_set = [];
+        public $script_set = [];
+    }
+    class cssItemBundle
+    {
+        public $url;
+        public function __construct($url)
+        {
+            $this->url = $url;
+        }
+    }
+    class scriptItemBundle
+    {
+        public $url;
+        public function __construct($url)
+        {
+            $this->url = $url;
+        }
+    }
+}
+// Connexion à la base de données
+$cx_server = "localhost";
+$cx_login = "root";
+$cx_pwd = "";
+$cx_dbname = "teamup";
+
+function get_default_connection()
+{
+    global $cx_server, $cx_login, $cx_pwd, $cx_dbname;
+    return array(
+        "cx_server" => $cx_server,
+        "cx_login" => $cx_login,
+        "cx_pwd" => $cx_pwd,
+        "cx_dbname" => $cx_dbname
+    );
+}
+
+// Bundle Bootstrap (identique au précédent)
 $bootstrap = new bundle();
 $bootstrap->css_set = [
     new cssItemBundle("https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"),

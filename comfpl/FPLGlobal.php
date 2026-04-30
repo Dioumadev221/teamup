@@ -29,6 +29,6 @@ class FPLGlobal
 
     public static function get_theme_uri()
     {
-        return "../application/themes/" . self::$theme;
+        return "/teamup/application/themes/" . self::$theme;
     }
 }

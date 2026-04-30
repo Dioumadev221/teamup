@@ -1,32 +1,33 @@
 <?php
-require_once 'config.php';
-require_once '../comfpl/main.php';
+require_once '../comfpl/main.php';  
+require_once 'config.php';          
 require_once 'service/userservice.php';
 require_once 'models/userentity.php';
 
-// Traitement du formulaire
+$message = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nom = $_POST['utilisateur_nom'];
-    $login = $_POST['utilisateur_login'];
+    $nom = trim($_POST['utilisateur_nom']);
+    $login = trim($_POST['utilisateur_login']);
     $pwd = $_POST['utilisateur_pwd'];
-    $email = $_POST['utilisateur_email'];
+    $email = trim($_POST['utilisateur_email']);
     $date_creation = date('Y-m-d H:i:s');
 
-    $user = new UserEntity();
-    $user->utilisateur_nom = $nom;
-    $user->utilisateur_login = $login;
-    $user->utilisateur_pwd = $pwd;
-    $user->utilisateur_email = $email;
-    $user->utilisateur_creation = $date_creation;
+    if (!empty($nom) && !empty($login) && !empty($pwd) && !empty($email)) {
+        $user = new UserEntity();
+        $user->utilisateur_nom = $nom;
+        $user->utilisateur_login = $login;
+        $user->utilisateur_pwd = $pwd;
+        $user->utilisateur_email = $email;
+        $user->utilisateur_creation = $date_creation;
 
-    $service = new UserService();
-    $service->adduser($user);
-
-    header('Location: adduser.php?msg=success');
-    exit;
+        $service = new UserService();
+        $service->adduser($user);
+        $message = '<div class="alert alert-success">Utilisateur ajouté avec succès.</div>';
+    } else {
+        $message = '<div class="alert alert-danger">Tous les champs sont obligatoires.</div>';
+    }
 }
 ?>
-<!DOCTYPE html>
 <html>
 
 <head>
@@ -41,9 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php require_once 'phpinclude/navbar.php'; ?>
     <div class="container">
         <h2>Ajouter un utilisateur</h2>
-        <?php if (isset($_GET['msg']) && $_GET['msg'] == 'success') : ?>
-            <div class="alert alert-success">Utilisateur ajouté avec succès.</div>
-        <?php endif; ?>
+        <?php echo $message; ?>
         <form method="post" action="adduser.php">
             <div class="form-group">
                 <label for="utilisateur_nom">Nom</label>
@@ -62,6 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input type="email" class="form-control" id="utilisateur_email" name="utilisateur_email" required>
             </div>
             <button type="submit" class="btn btn-primary">Ajouter</button>
+            <a href="utilisateurs.php" class="btn btn-secondary">Annuler</a>
         </form>
     </div>
 </body>
