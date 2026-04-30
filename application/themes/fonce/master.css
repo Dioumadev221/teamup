@@ -1,0 +1,22 @@
+/* Thème foncé */
+.navbar {
+    background-color: #e7e7f4 !important;
+    border-bottom: 1px solid #2c2c3e;
+}
+.navbar .navbar-brand,
+.navbar .nav-link {
+    color: #242222 !important;
+}
+.navbar .nav-link:hover {
+    color: #bb86fc !important;
+}
+body {
+    background-color: #1e1e2e;
+    color: #e0e0e0;
+}
+.container {
+    background-color: #1e1e2e;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+}

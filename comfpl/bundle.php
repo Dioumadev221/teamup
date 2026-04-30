@@ -4,7 +4,6 @@ class bundle
     public $css_set = [];
     public $script_set = [];
 }
-
 class cssItemBundle
 {
     public $url;
@@ -13,7 +12,6 @@ class cssItemBundle
         $this->url = $url;
     }
 }
-
 class scriptItemBundle
 {
     public $url;
